@@ -35,6 +35,10 @@
     - Reload systemctl
     - Restart Kibana
 
+- name: Configure Kibana to start on RedHat
+  when: ansible_os_family == 'RedHat'
+  service: name=kibana enabled=yes state=restarted
+
 - name: Touch log file if it does not exist
   command: touch {{ kibana_log }}
            creates={{ kibana_log }}
