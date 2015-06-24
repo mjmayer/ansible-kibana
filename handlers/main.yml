@@ -2,4 +2,4 @@
 - name: Restart Kibana
   service: name=kibana state=restarted
 - name: Reload systemctl
-  command: systemctl reload-daemon
+  command: systemctl daemon-reload
