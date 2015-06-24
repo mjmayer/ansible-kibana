@@ -24,7 +24,15 @@
 
 - name: Configure Kibana service definition
   template: src=kibana.conf.j2 dest=/etc/init/kibana.conf
+  when: ansible_os_family == 'Debian'
   notify:
+    - Restart Kibana
+
+- name: Configure Kibana service definition
+  template: src=kibana.service.j2 dest=/etc/systemd/system/kibana.service
+  when: ansible_os_family == 'RedHat'
+  notify:
+    - Reload systemctl
     - Restart Kibana
 
 - name: Touch log file if it does not exist
